@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/MainScene.tres" type="TileSet" id=1]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
 
 [node name="MainScene" type="Node2D"]
 
@@ -22,3 +23,15 @@ tile_data = PoolIntArray( 65553, 7, 0, 65554, 7, 1, 65555, 7, 1, 65556, 7, 1, 65
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Player2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 298, 171 )
+
+[node name="Camera2D" type="Camera2D" parent="Player2"]
+position = Vector2( -298, -171 )
+current = true
+zoom = Vector2( 0.5, 0.5 )
+limit_left = 0
+limit_top = 0
+limit_right = 1280
+limit_bottom = 1280
