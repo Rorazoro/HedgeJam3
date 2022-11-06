@@ -1,5 +1,6 @@
 [gd_scene load_steps=16 format=2]
 
+
 [ext_resource path="res://kenney_rpgurbanpack/Tiles/tile_0024.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Player.gd" type="Script" id=2]
 [ext_resource path="res://kenney_rpgurbanpack/Tiles/tile_0026.png" type="Texture" id=3]
@@ -13,6 +14,7 @@
 [ext_resource path="res://kenney_rpgurbanpack/Tiles/tile_0050.png" type="Texture" id=11]
 [ext_resource path="res://kenney_rpgurbanpack/Tiles/tile_0051.png" type="Texture" id=12]
 [ext_resource path="res://kenney_rpgurbanpack/Tiles/tile_0077.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Player/tile_0077.png" type="Texture" id=14]
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -62,7 +64,7 @@ extents = Vector2( 3.5, 6.5 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
-FACTOR = 1.75
+FACTOR = 0.9
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
@@ -70,5 +72,8 @@ animation = "move_r"
 offset = Vector2( 8, 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 8, 9 )
 shape = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.5, 0.5 )

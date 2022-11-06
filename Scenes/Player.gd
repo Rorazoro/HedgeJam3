@@ -6,6 +6,7 @@ enum {
 	DASH,
 }
 
+
 #set default state
 var state = IDLE
 
