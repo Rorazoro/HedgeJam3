@@ -22,28 +22,37 @@ export (float, 0, 1.0) var acceleration = 0.25
 var dash_acc = 20
 var state_time = 0.0
 export (float) var dash_time = 0.15
+var prev_dir = Vector2.ZERO
 var dir = Vector2.ZERO
 var velocity = Vector2.ZERO
 
-
 func _physics_process(delta):
 	dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	if dir != Vector2.ZERO:
+		prev_dir = dir
+	
+	$AnimatedSprite.play()
 	
 	match state:
 		IDLE:
 			velocity = Vector2.ZERO
+			set_idle_animations()
+			
 			#change states
 			if dir.length() != 0:
 				set_state(MOVE)
 		DASH:
 			set_dash_velocity(dir)
 			move_and_slide(velocity * MAX_SPEED * FACTOR)
+			
 			#change states
 			if state_time >= dash_time:
 				set_state(MOVE)
 		MOVE:
 			set_velocity(dir)
 			move_and_slide(velocity * MAX_SPEED * FACTOR)
+			set_move_animations()
+			
 			#change states
 			if dir.length() == 0:
 				set_state(IDLE)
@@ -61,29 +70,31 @@ func set_dash_velocity(dir):
 	
 # geting player velocity based on input
 func set_velocity(dir):
-	#NUMBER ONE
-#	var x_dir = Input.get_axis("move_left", "move_right")
-#	var y_dir = Input.get_axis("move_up", "move_down")
-#	# 6 frame acceleration?? (Not sure if i remember 
-#	# how to check this, but fingers crossed
-#	if abs(velocity.x) >= MAX_SPEED * FACTOR and sign(velocity.x) == x_dir:
-#		velocity.x = move_toward(velocity.x, x_dir * MAX_SPEED * FACTOR, FRICTION * FACTOR * delta)
-#	else:
-#		velocity.x = move_toward(velocity.x, x_dir * MAX_SPEED * FACTOR , ACCEL * FACTOR * delta)	
-#	if abs(velocity.y) >= MAX_SPEED * FACTOR and sign(velocity.y) == y_dir:
-#		velocity.y = move_toward(velocity.y, y_dir * MAX_SPEED * FACTOR, FRICTION * FACTOR * delta)
-#	else:
-#		velocity.y = move_toward(velocity.y, y_dir * MAX_SPEED * FACTOR , ACCEL * FACTOR * delta)
-#	if (abs(velocity.x) >= MAX_SPEED * FACTOR and abs(velocity.y) >= MAX_SPEED * FACTOR ) and (sign(velocity.x) == x_dir and sign(velocity.y) == y_dir):
-#		velocity.x = move_toward(velocity.x, x_dir * MAX_SPEED * FACTOR, FRICTION * FACTOR * delta) / 2
-#		velocity.y = move_toward(velocity.y, y_dir * MAX_SPEED * FACTOR, FRICTION * FACTOR * delta) / 2
-
-	#NUMBER TWO
 	if velocity.abs() >= Vector2(1,1):
 		velocity = velocity.move_toward(dir, FRICTION * FACTOR)
 	else:
 		velocity = velocity.move_toward(dir, ACCEL * FACTOR)
+		
+func set_idle_animations():
+	if prev_dir.x > 0:
+		$AnimatedSprite.animation = "idle_r"
+	elif prev_dir.x < 0:
+		$AnimatedSprite.animation = "idle_l"
+	elif prev_dir.y > 0:
+		$AnimatedSprite.animation = "idle_d"
+	elif prev_dir.y < 0:
+		$AnimatedSprite.animation = "idle_u"
+	elif prev_dir.x == 0 && prev_dir.y == 0:
+		$AnimatedSprite.animation = "idle_d"
 
-
+func set_move_animations():
+	if dir.x > 0:
+		$AnimatedSprite.animation = "move_r"
+	elif dir.x < 0:
+		$AnimatedSprite.animation = "move_l"
+	elif dir.y > 0:
+		$AnimatedSprite.animation = "move_d"
+	elif dir.y < 0:
+		$AnimatedSprite.animation = "move_u"
 
 
