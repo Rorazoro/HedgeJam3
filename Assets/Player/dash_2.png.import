@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tile_0025.png-950bf75f8bf9b6aa1b5e460fd2130d07.stex"
+path="res://.import/dash_2.png-9498cea2c4766864ffec9279b6b51d0c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://kenney_rpgurbanpack/Tiles/tile_0025.png"
-dest_files=[ "res://.import/tile_0025.png-950bf75f8bf9b6aa1b5e460fd2130d07.stex" ]
+source_file="res://Assets/Player/dash_2.png"
+dest_files=[ "res://.import/dash_2.png-9498cea2c4766864ffec9279b6b51d0c.stex" ]
 
 [params]
 

@@ -44,6 +44,7 @@ func _physics_process(delta):
 		DASH:
 			set_dash_velocity(dir)
 			move_and_slide(velocity * MAX_SPEED * FACTOR)
+			set_dash_animations()
 			
 			#change states
 			if state_time >= dash_time:
@@ -97,4 +98,9 @@ func set_move_animations():
 	elif dir.y < 0:
 		$AnimatedSprite.animation = "move_u"
 
+func set_dash_animations():
+	if dir.x > 0:
+		$AnimatedSprite.animation = "dash_r"
+	elif dir.x < 0:
+		$AnimatedSprite.animation = "dash_l"
 
