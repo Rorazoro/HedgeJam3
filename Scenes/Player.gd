@@ -46,6 +46,8 @@ func _physics_process(delta):
 			move_and_slide(velocity * MAX_SPEED * FACTOR)
 			set_dash_animations()
 			
+			$Whoosh.play(0.087)
+			
 			#change states
 			if state_time >= dash_time:
 				set_state(MOVE)
