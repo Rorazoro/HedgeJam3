@@ -3,7 +3,7 @@
 [ext_resource path="res://Scenes/MainScene.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Phonebooth.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/Enemies/phonebooth_idle_1.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/PhoneBooth_Monster.tscn" type="PackedScene" id=4]
 
 [node name="MainScene" type="Node2D"]
 
@@ -32,6 +32,5 @@ position = Vector2( 277, 168 )
 [node name="StaticBody2D" parent="." instance=ExtResource( 3 )]
 position = Vector2( 448, 117 )
 
-[node name="PhoneboothIdle1" type="Sprite" parent="."]
-position = Vector2( 232, 112 )
-texture = ExtResource( 4 )
+[node name="KinematicBody2D" parent="." instance=ExtResource( 4 )]
+position = Vector2( 233, 157 )
