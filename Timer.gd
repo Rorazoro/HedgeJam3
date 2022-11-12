@@ -17,7 +17,7 @@ func _ready():
 	AudioPlay.play()
 	
 	#Setup coundown timer
-	var timer = 15.0
+	var timer = 10.0
 	Countdown.start(timer)
 	var time = calc_time_label(timer)
 	TimeLabel.text = time
@@ -41,11 +41,18 @@ func calc_time_label(seconds):
 
 
 func _on_AudioStreamPlayer_finished():
-	var index = randi() % 3
-	AudioPlay.set_stream(tones[index])
-	AudioPlay.play()
+	if !Countdown.is_stopped():
+		var index = randi() % 3
+		AudioPlay.set_stream(tones[index])
+		AudioPlay.play()
+	else: 
+		AudioPlay.play()
+
 
 
 func _on_Timer_timeout():
 	Countdown.stop()
+	var game_over = preload("res://Assets/Sounds/game_over.mp3")
+	AudioPlay.set_stream(game_over)
+	AudioPlay.play()
 	

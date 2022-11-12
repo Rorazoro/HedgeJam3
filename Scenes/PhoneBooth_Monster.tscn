@@ -46,7 +46,7 @@ extents = Vector2( 10, 11.5 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 8 )
 animation = "Idle"
-frame = 4
+frame = 6
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
