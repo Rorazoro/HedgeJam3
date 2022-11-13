@@ -97,3 +97,8 @@ current = true
 zoom = Vector2( 0.5, 0.5 )
 
 [node name="Timer" parent="Camera2D" instance=ExtResource( 16 )]
+[node name="RayCast2D" type="RayCast2D" parent="."]
+rotation = 1.5708
+enabled = true
+cast_to = Vector2( 0, 25 )
+collision_mask = 2

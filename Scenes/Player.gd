@@ -25,8 +25,14 @@ export (float) var dash_time = 0.15
 var prev_dir = Vector2.ZERO
 var dir = Vector2.ZERO
 var velocity = Vector2.ZERO
+var inputEnabled = true
 
 func _physics_process(delta):
+	if inputEnabled:
+		move(delta)
+		interact()
+	
+func move(delta):
 	dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if dir != Vector2.ZERO:
 		prev_dir = dir
@@ -37,6 +43,7 @@ func _physics_process(delta):
 		IDLE:
 			velocity = Vector2.ZERO
 			set_idle_animations()
+			set_raycast_direction()
 			
 			#change states
 			if dir.length() != 0:
@@ -45,6 +52,7 @@ func _physics_process(delta):
 			set_dash_velocity(dir)
 			move_and_slide(velocity * MAX_SPEED * FACTOR)
 			set_dash_animations()
+			set_raycast_direction()
 			
 			$Whoosh.play(0.087)
 			
@@ -55,6 +63,7 @@ func _physics_process(delta):
 			set_velocity(dir)
 			move_and_slide(velocity * MAX_SPEED * FACTOR)
 			set_move_animations()
+			set_raycast_direction()
 			
 			#change states
 			if dir.length() == 0:
@@ -63,6 +72,12 @@ func _physics_process(delta):
 				set_state(DASH)
 #increment time in each state by delta
 	state_time += delta
+
+func interact():
+	if Input.is_action_just_pressed("interact") and $RayCast2D.is_colliding():
+		var collider = $RayCast2D.get_collider();
+		print("Player recognized object (" + collider.name + ")")
+		collider.on_interact(self)
 
 func set_state(new_state):
 	state = new_state
@@ -89,6 +104,18 @@ func set_idle_animations():
 		$AnimatedSprite.animation = "idle_u"
 	elif prev_dir.x == 0 && prev_dir.y == 0:
 		$AnimatedSprite.animation = "idle_d"
+		
+func set_raycast_direction():
+	if prev_dir.x > 0:
+		$RayCast2D.rotation_degrees = -90
+	elif prev_dir.x < 0:
+		$RayCast2D.rotation_degrees = 90
+	elif prev_dir.y > 0:
+		$RayCast2D.rotation_degrees = 0
+	elif prev_dir.y < 0:
+		$RayCast2D.rotation_degrees = 180
+	elif prev_dir.x == 0 && prev_dir.y == 0:
+		$RayCast2D.rotation_degrees = 0
 
 func set_move_animations():
 	if dir.x > 0:
