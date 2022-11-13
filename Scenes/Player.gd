@@ -54,6 +54,8 @@ func move(delta):
 			set_dash_animations()
 			set_raycast_direction()
 			
+			$Whoosh.play(0.087)
+			
 			#change states
 			if state_time >= dash_time:
 				set_state(MOVE)
@@ -131,3 +133,8 @@ func set_dash_animations():
 	elif dir.x < 0:
 		$AnimatedSprite.animation = "dash_l"
 
+func check_collisions():
+	pass
+#	for i in get_slide_count():
+#		var collision = get_slide_collision(i)
+#		if collision.coll

@@ -54,3 +54,25 @@ func move(delta):
 func look_at_direction(direction:Vector2):
 	direction = direction.normalized()
 	$Phonebooth_Monster.flip_h = direction.x < 0
+
+# extends StaticBody2D
+
+# var interactable = false
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+# func _process(delta):
+	# if interactable:
+		# if Input.is_action_just_pressed("interact"):
+			# print("Phonebooth checked!")
+	# else: 
+		# pass
+
+
+# func _on_Area2D_body_entered(body):
+	# if body.name == "Player":
+		# interactable = true
+
+
+# func _on_Area2D_body_exited(body):
+	# if body.name == "Player":
+		# interactable = false
