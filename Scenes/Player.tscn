@@ -15,7 +15,7 @@
 [ext_resource path="res://Assets/Player/dash_1.png" type="Texture" id=13]
 [ext_resource path="res://kenney_rpgurbanpack/Tiles/tile_0077.png" type="Texture" id=14]
 [ext_resource path="res://Assets/Player/dash_2.png" type="Texture" id=15]
-[ext_resource path="res://Timer.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/GameUI.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Assets/Sounds/whoosh.wav" type="AudioStream" id=17]
 
 [sub_resource type="SpriteFrames" id=2]
@@ -72,19 +72,18 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 3.5, 6.5 )
+extents = Vector2( 11.5, 9.5 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
-FACTOR = 0.9
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( -8, -8 )
+scale = Vector2( 2.5, 2.5 )
 frames = SubResource( 2 )
-animation = "dash_l"
-offset = Vector2( 8, 8 )
+animation = "move_u"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.5, 10.5 )
 shape = SubResource( 1 )
 
 [node name="Whoosh" type="AudioStreamPlayer" parent="."]
@@ -94,9 +93,17 @@ volume_db = -4.412
 [node name="Camera2D" type="Camera2D" parent="."]
 z_index = 2
 current = true
-zoom = Vector2( 0.5, 0.5 )
 
-[node name="Timer" parent="Camera2D" instance=ExtResource( 16 )]
+[node name="UI" parent="Camera2D" instance=ExtResource( 16 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+
 [node name="RayCast2D" type="RayCast2D" parent="."]
 rotation = 1.5708
 enabled = true

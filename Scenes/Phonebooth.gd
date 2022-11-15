@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 export(bool) var isReal = false
-export(float) var MAX_SPEED = 50
+export(float) var MAX_SPEED = 100
 export(float) var AI_START_PERIOD = 2
 
 var startAI = false
@@ -43,7 +43,11 @@ func check_ai_start_time_elapsed():
 
 func move(delta):
 	dir = position.direction_to($NavigationAgent2D.get_next_location())
-	velocity = dir * MAX_SPEED
+	
+	if GameManager.fastEnemies:
+		velocity = dir * (MAX_SPEED + 30)
+	else:
+		velocity = dir * MAX_SPEED
 	look_at_direction(dir)
 	$NavigationAgent2D.set_velocity(velocity)
 	#velocity = move_and_slide(velocity)

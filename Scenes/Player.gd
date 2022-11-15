@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+class_name Player
+
 enum {
 	MOVE,
 	IDLE,
@@ -11,13 +13,10 @@ enum {
 var state = IDLE
 
 # the movement variables (mess around with them to make the movement the way you like)
-export (float) var FACTOR = 2.5
-var MAX_SPEED = 100
-var FRICTION = 900 
-var ACCEL = 1000 
-
-export (float, 0, 1.0) var friction = 0.2
-export (float, 0, 1.0) var acceleration = 0.25
+export (float) var FACTOR = 1.5
+export (float) var MAX_SPEED = 100
+export (float) var FRICTION = 900 
+export (float) var ACCEL = 1000 
 
 var dash_acc = 20
 var state_time = 0.0
